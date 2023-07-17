@@ -35,5 +35,27 @@
       "weatherIcon": "/icons/rainy.svg",
       "weather": "9°"
     }
+  ],
+  "conditions": [
+    {
+      "icon": "/icons/thermometer.svg",
+      "title": "Real feel",
+      "info": "19°"
+    },
+    {
+      "icon": "/icons/humidity.svg",
+      "title": "Humidity",
+      "info": "28%"
+    },
+    {
+      "icon": "/icons/wind.svg",
+      "title": "Wind",
+      "info": "0.2km/h"
+    },
+    {
+      "icon": "/icons/uv-index.svg",
+      "title": "UV index",
+      "info": "3"
+    }
   ]
 }

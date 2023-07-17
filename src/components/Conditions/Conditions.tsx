@@ -1,34 +1,21 @@
+// Component import
 import ConditionCard from "./ConditionCard";
+
+// Data import
+import data from "../json/data.json";
 
 const Conditions = () => {
   return (
-    <section className="flex flex-col bg-background-components px-10 py-5 rounded-md">
+    <section className="flex flex-col rounded-md">
       <p className="p-5 text-secondary-color">Air conditions</p>
-      <div className="flex flex-col lg:flex-row lg:justify-between">
-        <div className="flex flex-col gap-10">
+      <div className="grid grid-cols-2 gap-5">
+        {data.conditions.map((condition) => (
           <ConditionCard
-            ConditionIcon="/icons/thermometer.svg"
-            ConditionTitle="Real Feel"
-            ConditionInfo="30°"
+            ConditionIcon={condition.icon}
+            ConditionTitle={condition.title}
+            ConditionInfo={condition.info}
           />
-          <ConditionCard
-            ConditionIcon="/icons/humidity.svg"
-            ConditionTitle="Chance of rain"
-            ConditionInfo="0%"
-          />
-        </div>
-        <div className="flex flex-col gap-10 mt-10 lg:mt-0">
-          <ConditionCard
-            ConditionIcon="/icons/wind.svg"
-            ConditionTitle="Wind"
-            ConditionInfo="0.2km/h"
-          />
-          <ConditionCard
-            ConditionIcon="/icons/uv-index.svg"
-            ConditionTitle="UV index"
-            ConditionInfo="3"
-          />
-        </div>
+        ))}
       </div>
     </section>
   );
