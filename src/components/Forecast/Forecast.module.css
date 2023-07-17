@@ -3,7 +3,8 @@
   justify-content: space-between;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  padding: 2rem;
+  padding: 4rem;
+  gap: 1rem;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -16,19 +17,26 @@
   background: #6a717b;
   border-radius: 0.625rem;
 }
-.forecast::-webkit-scrollbar-track {
-  background: transparent;
-}
 
 .forecastCard {
   scroll-snap-align: start;
   flex-shrink: 0;
-  width: 10rem;
-  height: 10rem;
+  width: 8rem;
+  height: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
-  gap: 1.2rem;
+  gap: 2rem;
+}
+
+@media (width >= 1024px) {
+  .forecast {
+    padding: 2rem;
+  }
+
+  .forecastCard {
+    width: 10rem;
+    height: 10rem;
+  }
 }

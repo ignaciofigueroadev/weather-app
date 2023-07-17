@@ -6,18 +6,20 @@ import data from "../json/data.json";
 
 const Conditions = () => {
   return (
-    <section className="flex flex-col rounded-md">
-      <p className="p-5 text-secondary-color">Air conditions</p>
-      <div className="grid grid-cols-2 gap-5">
-        {data.conditions.map((condition) => (
-          <ConditionCard
-            ConditionIcon={condition.icon}
-            ConditionTitle={condition.title}
-            ConditionInfo={condition.info}
-          />
-        ))}
-      </div>
-    </section>
+    <>
+      <p className=" text-secondary-color font-medium">Air conditions</p>
+      <section className="flex flex-col rounded-md">
+        <div className="grid grid-cols-2 gap-5">
+          {data.conditions.map((condition) => (
+            <ConditionCard
+              ConditionIcon={condition.icon}
+              ConditionTitle={condition.title}
+              ConditionInfo={condition.info}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 
