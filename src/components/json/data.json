@@ -38,24 +38,16 @@
   ],
   "conditions": [
     {
-      "icon": "/icons/thermometer.svg",
-      "title": "Real feel",
-      "info": "19°"
+      "icon": "/icons/thermometer.svg"
     },
     {
-      "icon": "/icons/humidity.svg",
-      "title": "Humidity",
-      "info": "28%"
+      "icon": "/icons/humidity.svg"
     },
     {
-      "icon": "/icons/wind.svg",
-      "title": "Wind",
-      "info": "0.2km/h"
+      "icon": "/icons/wind.svg"
     },
     {
-      "icon": "/icons/uv-index.svg",
-      "title": "UV index",
-      "info": "3"
+      "icon": "/icons/uv-index.svg"
     }
   ]
 }
