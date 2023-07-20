@@ -60,7 +60,7 @@ function App() {
     const fetchWeatherData = async () => {
       try {
         const API_KEY = "281f44d1895cfeaa30ef8864824e9334";
-        const API = `http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
+        const API = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(
           location
         )}&appid=${API_KEY}`;
 
