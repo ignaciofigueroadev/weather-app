@@ -7,11 +7,11 @@ import data from "../json/data.json";
 // Styles import
 import styles from "./Forecast.module.css";
 
-type Props = {
-  city: string;
-};
+// type Props = {
+//   city: string;
+// };
 
-const Forecast = ({ city }: Props) => {
+const Forecast = () => {
   return (
     <>
       <p className="text-secondary-color font-medium">

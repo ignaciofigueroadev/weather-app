@@ -56,13 +56,6 @@ function App() {
     return "";
   };
 
-  // const convertToCelsius = (temperature: number) => {
-  //   if (typeof temperature === "number") {
-  //     return Number((temperature - 273.15).toFixed(0));
-  //   }
-  //   return 0;
-  // };
-
   useEffect(() => {
     const fetchWeatherData = async () => {
       try {
@@ -73,7 +66,6 @@ function App() {
 
         const response = await fetch(API);
         const data = await response.json();
-        console.log(data);
 
         setWeatherData(data);
         setIsLoading(!isLoading);
