@@ -1,12 +1,12 @@
 import ConditionCard from "./ConditionCard";
 
 type Props = {
-  feelsLikeValue: any;
-  humidityValue: any;
-  windValue: any;
-  visibilityValue: any;
-  sunriseValue: any;
-  sunsetValue: any;
+  feelsLikeValue: string;
+  humidityValue: number;
+  windValue: number;
+  visibilityValue: number;
+  sunriseValue: string;
+  sunsetValue: string;
 };
 
 const Conditions = ({
@@ -24,13 +24,6 @@ const Conditions = ({
     return "";
   };
 
-  const convertToCelsius = (temperature: number) => {
-    if (temperature) {
-      return (temperature - 273.15).toFixed(0);
-    }
-    return "";
-  };
-
   return (
     <>
       <p className="text-secondary-color font-medium">Air conditions</p>
@@ -39,9 +32,7 @@ const Conditions = ({
           <ConditionCard
             ConditionIcon={"/icons/thermometer.svg"}
             ConditionTitle={"Feels like"}
-            ConditionInfo={
-              feelsLikeValue ? `${convertToCelsius(feelsLikeValue)}°` : "N/A"
-            }
+            ConditionInfo={feelsLikeValue ? `${feelsLikeValue}°` : "N/A"}
           />
           <ConditionCard
             ConditionIcon={"/icons/humidity.svg"}

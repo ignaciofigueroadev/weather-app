@@ -4,17 +4,38 @@ import { useEffect, useState } from "react";
 // Component imports
 import Conditions from "./components/Conditions/Conditions";
 import Footer from "./components/Footer/Footer";
-import Forecast from "./components/Forecast/Forecast";
 import Header from "./components/Header/Header";
 import Weather from "./components/Weather/Weather";
 import Loader from "./components/utils/Loader/Loader";
+import Welcome from "./components/utils/Welcome/Welcome";
+// import Forecast from "./components/Forecast/Forecast";
 
 // dayjs import
 import dayjs from "dayjs";
 
+type WeatherData = {
+  name: string;
+  main?: {
+    temp: number;
+    temp_max: number;
+    temp_min: number;
+    feels_like: number;
+    humidity: number;
+  };
+  sys?: {
+    country: string;
+    sunrise: number;
+    sunset: number;
+  };
+  wind?: {
+    speed: number;
+  };
+  visibility: number;
+};
+
 function App() {
   const [location, setLocation] = useState<string>("");
-  const [weatherData, setWeatherData] = useState<{}>({});
+  const [weatherData, setWeatherData] = useState<WeatherData>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleSearch = (city: string) => {
@@ -25,7 +46,6 @@ function App() {
     if (e.key === "Enter") {
       e.preventDefault();
       setIsLoading(true);
-      // setWeatherData({});
     }
   };
 
@@ -35,6 +55,13 @@ function App() {
     }
     return "";
   };
+
+  // const convertToCelsius = (temperature: number) => {
+  //   if (typeof temperature === "number") {
+  //     return Number((temperature - 273.15).toFixed(0));
+  //   }
+  //   return 0;
+  // };
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -46,6 +73,7 @@ function App() {
 
         const response = await fetch(API);
         const data = await response.json();
+        console.log(data);
 
         setWeatherData(data);
         setIsLoading(!isLoading);
@@ -66,28 +94,36 @@ function App() {
       {isLoading ? (
         <Loader />
       ) : (
-        <Weather
-          city={weatherData.name}
-          temperature={convertToCelsius(weatherData.main?.temp)}
-          tempMax={convertToCelsius(weatherData.main?.temp_max)}
-          tempMin={convertToCelsius(weatherData.main?.temp_min)}
-          location={weatherData.sys?.country}
-        />
-      )}
+        <>
+          {weatherData ? (
+            <Weather
+              city={weatherData.name}
+              temperature={convertToCelsius(weatherData.main?.temp || 0)}
+              tempMax={convertToCelsius(weatherData.main?.temp_max || 0)}
+              tempMin={convertToCelsius(weatherData.main?.temp_min || 0)}
+              location={weatherData.sys?.country || ""}
+            />
+          ) : (
+            <Welcome />
+          )}
 
-      <Forecast city={location} />
+          {/* <Forecast /> */}
 
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Conditions
-          feelsLikeValue={convertToCelsius(weatherData.main?.feels_like)}
-          humidityValue={weatherData.main?.humidity}
-          windValue={weatherData.wind?.speed}
-          sunriseValue={dayjs.unix(weatherData.sys?.sunrise).format("HH:mm ")}
-          sunsetValue={dayjs.unix(weatherData.sys?.sunset).format("HH:mm ")}
-          visibilityValue={weatherData.visibility}
-        />
+          <Conditions
+            feelsLikeValue={convertToCelsius(
+              weatherData?.main?.feels_like ?? 0
+            )}
+            humidityValue={weatherData?.main?.humidity || 0}
+            windValue={weatherData?.wind?.speed || 0}
+            sunriseValue={dayjs
+              .unix(weatherData?.sys?.sunrise || 0)
+              .format("HH:mm")}
+            sunsetValue={dayjs
+              .unix(weatherData?.sys?.sunset || 0)
+              .format("HH:mm")}
+            visibilityValue={weatherData?.visibility || 0}
+          />
+        </>
       )}
 
       <Footer />

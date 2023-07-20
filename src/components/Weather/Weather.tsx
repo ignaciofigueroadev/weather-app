@@ -1,22 +1,12 @@
 type Props = {
-  city: any;
-  temperature: any;
-  tempMax: any;
-  tempMin: any;
-  location: any;
-  icon: any;
-  description: any;
+  city: string;
+  temperature: string;
+  tempMax: string;
+  tempMin: string;
+  location: string;
 };
 
-const Weather = ({
-  city,
-  temperature,
-  tempMax,
-  tempMin,
-  location,
-  icon,
-  description,
-}: Props) => {
+const Weather = ({ city, temperature, tempMax, tempMin, location }: Props) => {
   return (
     <section className="flex justify-center">
       <div className="flex flex-col items-center gap-5">
@@ -29,15 +19,11 @@ const Weather = ({
             <p className="text-secondary-color text-xl font-bold">{`${tempMax}° / ${tempMin}°`}</p>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center flex-col gap-2">
           {location !== "" && (
             <img src="/icons/location.svg" alt="Location" className="w-5" />
           )}
           <span>{location !== "" ? location : ""}</span>
-        </div>
-        <div className="flex items-center gap-2">
-          {icon && <img src={icon} alt="Weather Icon" className="w-5" />}
-          <span>{description !== "" ? description : ""}</span>
         </div>
       </div>
     </section>
