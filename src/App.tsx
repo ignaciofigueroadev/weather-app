@@ -6,9 +6,10 @@ import Conditions from "./components/Conditions/Conditions";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
 import Weather from "./components/Weather/Weather";
-import Loader from "./components/utils/Loader/Loader";
+import CityNotFound from "./components/utils/CityNotFound";
+import CardConditionsSkeleton from "./components/utils/Skeleton/CardCoditionsSkeleton";
+import WeatherSkeleton from "./components/utils/Skeleton/WeatherSkeleton";
 import Welcome from "./components/utils/Welcome/Welcome";
-// import Forecast from "./components/Forecast/Forecast";
 
 // dayjs import
 import dayjs from "dayjs";
@@ -34,9 +35,10 @@ type WeatherData = {
 };
 
 function App() {
-  const [location, setLocation] = useState<string>("");
-  const [weatherData, setWeatherData] = useState<WeatherData>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [location, setLocation] = useState("");
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleSearch = (city: string) => {
     setLocation(city);
@@ -67,9 +69,15 @@ function App() {
         const response = await fetch(API);
         const data = await response.json();
 
-        setWeatherData(data);
+        if (response.ok) {
+          setWeatherData(data);
+          setIsError(false);
+        } else {
+          setIsError(true);
+        }
         setIsLoading(!isLoading);
       } catch (error) {
+        setIsError(true);
         setIsLoading(isLoading);
       }
     };
@@ -80,11 +88,13 @@ function App() {
   }, [location, isLoading]);
 
   return (
-    <div className="min-h-screen bg-background text-principal-color px-10 lg:px-80 font-thin flex flex-col gap-11">
+    <div className="min-h-screen px-10 lg:px-80 flex flex-col gap-11">
       <Header onSearch={handleSearch} onKeyPress={searchLocation} />
 
       {isLoading ? (
-        <Loader />
+        <WeatherSkeleton />
+      ) : isError ? (
+        <CityNotFound />
       ) : (
         <>
           {weatherData ? (
@@ -98,8 +108,6 @@ function App() {
           ) : (
             <Welcome />
           )}
-
-          {/* <Forecast /> */}
 
           <Conditions
             feelsLikeValue={convertToCelsius(
@@ -117,6 +125,8 @@ function App() {
           />
         </>
       )}
+
+      {weatherData && isLoading && <CardConditionsSkeleton totalCards={6} />}
 
       <Footer />
     </div>

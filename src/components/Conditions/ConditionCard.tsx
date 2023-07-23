@@ -11,9 +11,11 @@ const ConditionCard = ({
 }: Props) => {
   return (
     <div className="bg-background-components flex flex-col justify-center items-center gap-10 p-5 rounded-md">
-      <img className="w-10 lg:w-20" src={ConditionIcon} />
-      <p className="text-2xl font-medium text-center">{ConditionTitle}</p>
-      <p className="text-xl">{ConditionInfo}</p>
+      <div className="flex flex-col items-center gap-1">
+        <img className="w-10 lg:w-20" src={ConditionIcon} />
+        <p className="text-2xl text-center">{ConditionTitle}</p>
+      </div>
+      <p className="text-xl font-bold">{ConditionInfo}</p>
     </div>
   );
 };

@@ -26,7 +26,6 @@ const Conditions = ({
 
   return (
     <>
-      <p className="text-secondary-color font-medium">Air conditions</p>
       <section className="flex flex-col rounded-md">
         <div className="grid grid-cols-2 gap-5">
           <ConditionCard

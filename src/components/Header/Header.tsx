@@ -1,4 +1,3 @@
-// Hook imports
 import { useState } from "react";
 
 type Props = {
@@ -7,18 +6,24 @@ type Props = {
 };
 
 const Header = ({ onSearch, onKeyPress }: Props) => {
-  const [city, setCity] = useState<string>("");
+  const [city, setCity] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setCity(value);
-    onSearch(value);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      onKeyPress?.(e);
+      if (city.trim() === "") {
+        setError("Please enter a city name.");
+      } else {
+        setError(null);
+        onSearch(city);
+        onKeyPress?.(e);
+      }
     }
   };
 
@@ -26,13 +31,14 @@ const Header = ({ onSearch, onKeyPress }: Props) => {
     <header className="pt-8">
       <input
         type="text"
-        placeholder="Search for cities..."
+        placeholder="Search..."
         className="bg-background-components container rounded-full p-3 pl-8 outline-none"
         value={city}
         onChange={handleInputChange}
         onKeyDown={handleKeyPress}
         autoFocus
       />
+      {error && <p className="text-red-500 mt-10 text-center">{error}</p>}
     </header>
   );
 };

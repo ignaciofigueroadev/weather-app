@@ -1,9 +1,9 @@
 const Welcome = () => {
   return (
-    <div className="text-center grid gap-6">
-      <h2 className="text-4xl font-bold">Welcome!</h2>
-      <p className="text-sm font-thin">
-        Enter a location to get the current weather and its conditions.
+    <div className="text-center py-20">
+      <h2 className="text-4xl font-bold mb-4">Welcome to Weather App</h2>
+      <p className="text-lg text-gray-600">
+        Enter a location to get the current weather and conditions.
       </p>
     </div>
   );
